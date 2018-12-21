@@ -1,8 +1,4 @@
-import os
-import json
-from pprint import pprint
-import requests
-import validators
+import os,json,pprint,requests,validators
 
 data = {}
 
@@ -25,7 +21,7 @@ def question_link():
 
     for i in available_data['questions']:
         if i['question_link'] == data['question_link']:
-            print('\nResponse is available in database. Please select another response')
+            print('\nResponse is available in database. Please select another response.\n')
             exit()
 
 def implementation_level():
@@ -35,7 +31,7 @@ def implementation_level():
         data['implementation_level'] = input('Enter the implementation_level : ').lower()
 
         if data['implementation_level'] not in temp:
-            print('\nResponse is available in database. Please select another response.\n')
+            print('\nResponse is not correct. Please try another response.\n')
         else:
             break
 
@@ -46,7 +42,7 @@ def difficulty_level():
         data['difficulty_level'] = input('Enter the difficulty_level : ').lower()
 
         if data['difficulty_level'] not in temp:
-            print('\nResponse is available in database. Please select another response.\n')
+            print('\nResponse is not correct. Please try another response.\n')
         else:
             break
 
