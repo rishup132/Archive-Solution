@@ -20,8 +20,8 @@ if not os.path.exists(final_directory):
    os.makedirs(final_directory)
 
 for i in files:
-    open(final_directory+'/'+i,'w+')
+    new_file = open(final_directory+'/'+i,'w+')
 
 json_data = json.dumps(data)
-open(final_directory+'/'+files[-1],'w+')
-fprint(json_data)
+
+new_file.write(json_data)
