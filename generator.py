@@ -35,7 +35,7 @@ def implementation_level():
         data['implementation_level'] = input('Enter the implementation_level : ').lower()
 
         if data['implementation_level'] not in temp:
-            print('\nResponse is available in database. Please select another response')
+            print('\nResponse is available in database. Please select another response.\n')
         else:
             break
 
@@ -46,7 +46,7 @@ def difficulty_level():
         data['difficulty_level'] = input('Enter the difficulty_level : ').lower()
 
         if data['difficulty_level'] not in temp:
-            print('\nResponse is available in database. Please select another response')
+            print('\nResponse is available in database. Please select another response.\n')
         else:
             break
 
@@ -82,5 +82,18 @@ if not os.path.exists(final_directory):
 for i in files:
     open(final_directory+'/'+i,'w+')
 
+with open('base.json') as f:
+    available_data = json.load(f)
+
+if len(available_data['questions']) == 0:
+    data['id'] = 1
+else:
+    data['id'] = available_data['questions'][-1]['id'] + 1
+
+available_data['questions'].append(data)
+
+with open('base.json', 'w') as outfile:
+   json.dump(available_data, outfile, indent=4)
+
 with open(final_directory+'/'+'details.json', 'w') as outfile:
-   json.dump(data, outfile, indent=4, sort_keys=True)
+   json.dump(data, outfile, indent=4)
