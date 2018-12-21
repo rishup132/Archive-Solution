@@ -1,7 +1,54 @@
 import os
 import json
+from pprint import pprint
+import requests
+import validators
 
 data = {}
+
+def question_link():
+    while True:
+        data['question_link'] = input('Enter the question_link : ')
+
+        if validators.url(data['question_link']):
+            request = requests.get(data['question_link'])
+
+            if request.status_code != 200:
+                print('\nThe question link does not exist.\n')
+            else:
+                break
+        else:
+            print('\nThe question link is not a proper URL.\n')
+
+    with open('base.json') as f:
+        available_data = json.load(f)
+
+    for i in available_data['questions']:
+        if i['question_link'] == data['question_link']:
+            print('\nResponse is available in database. Please select another response')
+            exit()
+
+def implementation_level():
+    temp = ['basic','advance','expert']
+
+    while True:
+        data['implementation_level'] = input('Enter the implementation_level : ').lower()
+
+        if data['implementation_level'] not in temp:
+            print('\nResponse is available in database. Please select another response')
+        else:
+            break
+
+def difficulty_level():
+    temp = ['easy','medium','hard']
+
+    while True:
+        data['difficulty_level'] = input('Enter the difficulty_level : ').lower()
+
+        if data['difficulty_level'] not in temp:
+            print('\nResponse is available in database. Please select another response')
+        else:
+            break
 
 instruction = '\n\nBasic Instructions :\n'
 instruction += '\tauthor                : Name of the person who wants to add the problem.\n'
@@ -14,13 +61,15 @@ instruction += '\ttags                  : Specify tags to the problem with comma
 
 print(instruction)
 
-data['author'] = input('Name of the author : ')
-data['platform'] = input('Name of the platform : ')
+data['author'] = input('Name of the author : ').lower()
+data['platform'] = input('Name of the platform : ').lower()
 data['question_name'] = input('Enter the question_name : ')
-data['question_link'] = input('Enter the question_link : ')
-data['implementation_level'] = input('Enter the implementation_level : ')
-data['difficulty_level'] = input('Enter the difficulty_level : ')
-data['tags'] = input('Enter the tags : ')
+
+question_link()
+implementation_level()
+difficulty_level()
+
+data['tags'] = input('Enter the tags : ').lower()
 
 current_directory = os.getcwd()
 final_directory = os.path.join(current_directory, data['question_name'])
@@ -31,6 +80,7 @@ if not os.path.exists(final_directory):
    os.makedirs(final_directory)
 
 for i in files:
-    new_file = open(final_directory+'/'+i,'w+')
+    open(final_directory+'/'+i,'w+')
 
-new_file.write(json.dumps(data))
+with open(final_directory+'/'+'details.json', 'w') as outfile:
+   json.dump(data, outfile, indent=4, sort_keys=True)
