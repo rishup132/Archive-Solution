@@ -1,4 +1,5 @@
 import os,json,pprint,requests,validators
+from datetime import datetime, timedelta
 
 data = {}
 
@@ -81,15 +82,16 @@ for i in files:
 with open('base.json') as f:
     available_data = json.load(f)
 
-if len(available_data['questions']) == 0:
-    data['id'] = 1
-else:
-    data['id'] = available_data['questions'][-1]['id'] + 1
+data['submited_time_and_date'] = datetime.now()
+# if len(available_data['questions']) == 0:
+#     data['id'] = 1
+# else:
+#     data['id'] = available_data['questions'][-1]['id'] + 1
 
 available_data['questions'].append(data)
 
 with open('base.json', 'w') as outfile:
-   json.dump(available_data, outfile, indent=4)
+   json.dump(available_data, outfile, indent=4, sort_keys=True, default=str)
 
 with open(final_directory+'/'+'details.json', 'w') as outfile:
-   json.dump(data, outfile, indent=4)
+   json.dump(data, outfile, indent=4, sort_keys=True, default=str)
