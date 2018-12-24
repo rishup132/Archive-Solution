@@ -3,6 +3,20 @@ from datetime import datetime, timedelta
 
 data = {}
 
+def stopstalk():
+    while True:
+        data['stopstalk'] = input('Enter the profile_link : ')
+
+        if validators.url(data['stopstalk']):
+            request = requests.get(data['stopstalk'])
+
+            if request.status_code != 200:
+                print('\nThe profile link does not exist.\n')
+            else:
+                break
+        else:
+            print('\nThe profile link is not a proper URL.\n')
+
 def question_link():
     while True:
         data['question_link'] = input('Enter the question_link : ')
@@ -49,6 +63,7 @@ def difficulty_level():
 
 instruction = '\n\nBasic Instructions :\n'
 instruction += '\tauthor                : Name of the person who wants to add the problem.\n'
+instruction += '\tstopstalk             : Enter the full URL of your stopstalk profile.\n'
 instruction += '\tplatform              : Name of the site where the question exist.\n'
 instruction += '\tquestion_name         : Enter the name of the question you want to add as written on site page.\n'
 instruction += '\tquestion_link         : Enter the full URL of the question.\n'
@@ -59,19 +74,18 @@ instruction += '\ttags                  : Specify tags to the problem with comma
 print(instruction)
 
 data['author'] = input('Name of the author : ').lower()
+stopstalk()
 data['platform'] = input('Name of the platform : ').lower()
 data['question_name'] = input('Enter the question_name : ')
-
 question_link()
 implementation_level()
 difficulty_level()
-
 data['tags'] = input('Enter the tags : ').lower()
 
 current_directory = os.getcwd()
 final_directory = os.path.join(current_directory, data['question_name'])
 
-files = ['solution.cpp','summary.txt','details.json']
+files = ['solution.cpp','editorial.txt','details.json']
 
 if not os.path.exists(final_directory):
    os.makedirs(final_directory)
@@ -83,10 +97,6 @@ with open('base.json') as f:
     available_data = json.load(f)
 
 data['submited_time_and_date'] = datetime.now()
-# if len(available_data['questions']) == 0:
-#     data['id'] = 1
-# else:
-#     data['id'] = available_data['questions'][-1]['id'] + 1
 
 available_data['questions'].append(data)
 
