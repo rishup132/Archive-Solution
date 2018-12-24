@@ -55,10 +55,9 @@
     ![](https://github.com/rishup132/Archive-Solution/blob/master/data/14.PNG)
 - Eighth and last it will ask you for the tags of the problem. You can give multiple tags but all of them should be comma seprated.
 ![](https://github.com/rishup132/Archive-Solution/blob/master/data/15.PNG)
-- After all this, it will generate a folder same as problem name and it contains three seprate files.
+- After all this, it will generate a folder same as problem name and it contains two seprate files.
   1. details.json
   2. solution.cpp
-  3. summary.txt
   
 ![](https://github.com/rishup132/Archive-Solution/blob/master/data/16.PNG)
   
@@ -66,7 +65,7 @@
 
 ### Step 3
 
-- Now you have to put your solution code in solution.cpp and write an editorial of the problem in editorial.txt in your words.
+- Now you have to put your solution code in solution.cpp.
 
 ### Step 4
 
