@@ -23,7 +23,7 @@
 - Second it ask for stopstalk profile link. You have to give the full URL of your profile.
 
 ![](https://github.com/rishup132/Archive-Solution/blob/master/data/3.PNG)
-- Third it ask for author name. You have to give the name of site where the question actually exist.
+- Third it ask for platform name. You have to give the name of site where the question actually exist.
 
 ![](https://github.com/rishup132/Archive-Solution/blob/master/data/4.PNG)
 - Fourth it ask for question_name. You have to provide the actual name of the question which is written on the site where you take this question.
